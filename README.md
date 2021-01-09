@@ -1,20 +1,20 @@
-# Laravel InfluxDB
+# Laravel InfluxDB2
 
-A service made to provide, set up and use the library from influxdata [influxdb-php](https://github.com/influxdata/influxdb-php/) in Laravel.
+A service made to provide, set up and use the library from influxdatav2 [influxdb-php](https://github.com/influxdata/influxdb-client-php) in Laravel.
 
 ## Installing
 
 * Install by composer command:
 
 ```sh
-composer require tray-labs/laravel-influxdb
+composer require gelinger777/laravel-influxdbv2
 ```
 
 * Or add this line to require section of ```composer.json``` and execute on your terminal ```$ composer install```
 
 ```json
 "require": {
-    "tray-labs/laravel-influxdb": "^1.0"
+    "gelinger777/laravel-influxdbv2": "^1.0"
 }
 ```
 
@@ -26,14 +26,14 @@ composer require tray-labs/laravel-influxdb
 ```php
 'providers' => [
 //  ...
-    TrayLabs\InfluxDB\Providers\ServiceProvider::class,
+    GelingerMedia\InfluxDB2\Providers\ServiceProvider::class,
 ]
 ```
 
 ```php
 'aliases' => [
 //  ...
-    'InfluxDB' => TrayLabs\InfluxDB\Facades\InfluxDB::class,
+    'InfluxDB2' => GelingerMedia\InfluxDB2\Facades\InfluxDB2::class,
 ]
 ```
 
