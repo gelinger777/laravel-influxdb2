@@ -3,7 +3,7 @@
 namespace GelingerMedia\InfluxDB2\Facades;
 
 use Illuminate\Support\Facades\Facade as LaravelFacade;
-use InfluxDB2\Client;
+use InfluxDB2\Database;
 
 class InfluxDB2 extends LaravelFacade
 {
@@ -14,6 +14,6 @@ class InfluxDB2 extends LaravelFacade
      */
     protected static function getFacadeAccessor()
     {
-        return Client::class;
+        return Database::class;
     }
 }
