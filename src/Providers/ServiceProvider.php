@@ -4,12 +4,7 @@ namespace GelingerMedia\InfluxDB2\Providers;
 
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 use InfluxDB2\Client as InfluxClient;
-use InfluxDB2\Database as InfluxDB2;
-use InfluxDB2\Model\BucketRetentionRules;
-use InfluxDB2\Model\Organization;
-use InfluxDB2\Model\PostBucketRequest;
-use InfluxDB2\Service\BucketsService;
-use InfluxDB2\Service\OrganizationsService;
+use InfluxDB2\Model\WritePrecision;
 
 class ServiceProvider extends LaravelServiceProvider
 {
