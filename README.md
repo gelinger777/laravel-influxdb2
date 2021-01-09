@@ -1,20 +1,20 @@
-# Laravel InfluxDB2
+# Laravel Influxdb2
 
-A service made to provide, set up and use the library from influxdatav2 [influxdb-php](https://github.com/influxdata/influxdb-client-php) in Laravel.
+A service made to provide, set up and use the library from influxdata [influxdb-client-php](https://github.com/influxdata/influxdb-client-php) in Laravel.
 
 ## Installing
 
 * Install by composer command:
 
 ```sh
-composer require gelinger777/laravel-influxdbv2
+composer require amantinetti/laravel-influxdb2
 ```
 
 * Or add this line to require section of ```composer.json``` and execute on your terminal ```$ composer install```
 
 ```json
 "require": {
-    "gelinger777/laravel-influxdb2": "^1.0"
+    "amantinetti/laravel-influxdb2": "^1.0"
 }
 ```
 
@@ -26,30 +26,24 @@ composer require gelinger777/laravel-influxdbv2
 ```php
 'providers' => [
 //  ...
-    GelingerMedia\InfluxDB2\Providers\ServiceProvider::class,
+    amantinetti\InfluxDB\Providers\ServiceProvider::class,
 ]
 ```
 
 ```php
 'aliases' => [
 //  ...
-    'InfluxDB2' => GelingerMedia\InfluxDB2\Facades\InfluxDB2::class,
+    'InfluxDB' => amantinetti\InfluxDB\Facades\InfluxDB::class,
 ]
 ```
 
 * Define env variables to connect to InfluxDB
 
 ```ini
-INFLUXDB_HOST=localhost
-INFLUXDB_PORT=8086
-INFLUXDB_USER=some_user
-INFLUXDB_PASSWORD=some_password
-INFLUXDB_SSL=false
-INFLUXDB_VERIFYSSL=false
-INFLUXDB_TIMEOUT=0
-INFLUXDB_DBNAME=some_database
-INFLUXDB_UDP_ENABLED=false # Activate UDP
-INFLUXDB_UDP_PORT=4444 # Port for UDP
+INFLUXDB_URL=http://localhost:8086
+INFLUXDB_TOKEN=my-token
+INFLUXDB_BUCKET=my-bucket
+INFLUXDB_ORG=my-org
 ```
 
 * Write this into your terminal inside your project
@@ -64,10 +58,11 @@ php artisan vendor:publish
 <?php
 
 // executing a query will yield a resultset object
-$result = InfluxDB::query('select * from test_metric LIMIT 5');
+$query_api = InfluxDB::createQueryApi();
 
-// get the points from the resultset yields an array
-$points = $result->getPoints();
+$result = $query_api->query('from(bucket:"my-bucket") |> range(start: 1970-01-01T00:00:00.000000001Z) |> last()');
+
+
 ```
 
 ## Writing Data
@@ -75,25 +70,9 @@ $points = $result->getPoints();
 ```php
 <?php
 
-// create an array of points
-$points = array(
-    new InfluxDB\Point(
-        'test_metric', // name of the measurement
-        null, // the measurement value
-        ['host' => 'server01', 'region' => 'us-west'], // optional tags
-        ['cpucount' => 10], // optional additional fields
-        time() // Time precision has to be set to seconds!
-    ),
-    new InfluxDB\Point(
-        'test_metric', // name of the measurement
-        null, // the measurement value
-        ['host' => 'server01', 'region' => 'us-west'], // optional tags
-        ['cpucount' => 10], // optional additional fields
-        time() // Time precision has to be set to seconds!
-    )
-);
+$write_api = InfluxDB::createWriteApi();
+$write_api->write('h2o,location=west value=33i 15');
 
-$result = InfluxDB::writePoints($points, \InfluxDB\Database::PRECISION_SECONDS);
 ```
 
 License
