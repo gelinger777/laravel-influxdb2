@@ -1,0 +1,32 @@
+{
+    "name": "gelinger777/laravel-influxdb2",
+    "description": "A service made to provide, set up and use the library from influxdata v2.0 influxphp in Laravel.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gelinger Media",
+            "email": "team@gelinger.at"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "GelingerMedia\\InfluxDB2\\": "src/"
+        }
+    },
+    "require": {
+        "influxdata/influxdb-client-php": "^1.9.0",
+        "illuminate/support": "^5.0|^6.0|^7.0"
+    },
+    "minimum-stability": "dev",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "GelingerMedia\\InfluxDB2\\Providers\\ServiceProvider"
+            ],
+            "aliases": {
+                "InfluxDB2": "GelingerMedia\\InfluxDB2\\Facades\\InfluxDB2"
+            }
+        }
+   }
+}
