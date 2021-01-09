@@ -14,7 +14,7 @@ composer require gelinger777/laravel-influxdbv2
 
 ```json
 "require": {
-    "gelinger777/laravel-influxdbv2": "^1.0"
+    "gelinger777/laravel-influxdb2": "^1.0"
 }
 ```
 
